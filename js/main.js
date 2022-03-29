@@ -21,4 +21,4 @@ function checkLength(checkedString, maxLength = 140) {
   }
 }
 
-getLength();
+checkLength();
