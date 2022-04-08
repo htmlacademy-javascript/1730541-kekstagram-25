@@ -35,6 +35,7 @@ const getRandomInt = (min = 0, max = 0) => {
 
 //Источник: https://qna.habr.com/q/517912
 
+/*
 const checkLength = (checkedString, maxLength = 140) => {
   if (checkedString.length <= maxLength) {
     return true;
@@ -42,6 +43,7 @@ const checkLength = (checkedString, maxLength = 140) => {
     return false;
   }
 };
+*/
 
 const createComments = (arrayLength = 0) => {
   const result = [];
@@ -74,4 +76,5 @@ const createImages = (arrayLength = 0) => {
   return result;
 };
 
-createImages(MAX_ITEM);
+const images = createImages(MAX_ITEM);
+console.log(images);
