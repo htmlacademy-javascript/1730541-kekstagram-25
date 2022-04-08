@@ -33,8 +33,6 @@ const getRandomInt = (min = 0, max = 0) => {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 
-getRandomInt();
-
 //Источник: https://qna.habr.com/q/517912
 
 const checkLength = (checkedString, maxLength = 140) => {
@@ -45,11 +43,9 @@ const checkLength = (checkedString, maxLength = 140) => {
   }
 };
 
-checkLength();
-
 const createComments = (arrayLength = 0) => {
   const result = [];
-  for (let commentsLength = 0; commentsLength < arrayLength; commentsLength++) {
+  for (let commentsLength = 1; commentsLength < arrayLength; commentsLength++) {
     result.push({
       id: commentsLength,
       avatar: `img/avatar-${getRandomInt(1, 6)}.svg`,
@@ -59,28 +55,23 @@ const createComments = (arrayLength = 0) => {
 
   }
   return result;
-}
+};
 
-const createObject = (count = 0) => {
-  return {
-    id: count,
-    url: `photos/${count}.jpg`,
-    description: DESCRIPTIONS[getRandomInt(0, DESCRIPTIONS.length - 1)],
-    likes: getRandomInt(15, 200),
-    comments: createComments(getRandomInt(0, 7)),
-  };
-}
+const createImage = (count = 0) => ({
+  id: count,
+  url: `photos/${count}.jpg`,
+  description: DESCRIPTIONS[getRandomInt(0, DESCRIPTIONS.length - 1)],
+  likes: getRandomInt(15, 200),
+  comments: createComments(getRandomInt(0, 7)),
+});
 
-const createArray = (arrayLength = 0) => {
+const createImages = (arrayLength = 0) => {
   const result = [];
-  for (let length = 0; length < arrayLength; length++) {
-    result.push(createObject(length));
+  for (let length = 1; length < arrayLength; length++) {
+    result.push(createImage(length));
 
   }
   return result;
-}
+};
 
-createArray(MAX_ITEM);
-
-
-
+createImages(MAX_ITEM);
