@@ -77,4 +77,5 @@ const createImages = (arrayLength = 0) => {
 };
 
 const images = createImages(MAX_ITEM);
+// eslint-disable-next-line no-console
 console.log(images);
