@@ -46,15 +46,13 @@ const createImage = (count = 0) => ({
   comments: createComments(getRandomInt(0, 7)),
 });
 
-const createImages = (arrayLength = 0) => {
+const createImages = () => {
   const result = [];
-  for (let length = 1; length < arrayLength; length++) {
+  for (let length = 1; length < MAX_ITEM; length++) {
     result.push(createImage(length));
 
   }
   return result;
 };
 
-const images = createImages(MAX_ITEM);
-
-export { images };
+export { createImages };
