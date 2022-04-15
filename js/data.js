@@ -55,4 +55,5 @@ const createImages = () => {
   return result;
 };
 
+export { createImage };
 export { createImages };
