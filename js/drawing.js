@@ -1,19 +1,24 @@
-import { createImage } from './data.js';
+const pictureTemplate = document.querySelector('#picture').content;
 
-const userImage = document.querySelector('#picture').content;
-const newUserImage = userImage.querySelector('.picture');
-const imageListFragment = document.createDocumentFragment();
-const renderImage = createImage();
+const renderImage = ({ url, description, likes, comments }) => {
+  const pictureContainer = pictureTemplate.querySelector('.picture').cloneNode(true);
+  pictureContainer.querySelector('.picture__img').src = url;
+  pictureContainer.querySelector('.picture__img').alt = description;
+  pictureContainer.querySelector('.picture__comments').textContent = comments.length;
+  pictureContainer.querySelector('.picture__likes').textContent = likes;
 
-renderImage(({ url, description, likes, comments }) => {
-  const someImages = newUserImage.cloneNode(true);
-  someImages.querySelector('.picture__img').src = url;
-  someImages.querySelector('.picture__info').textContent = description;
-  someImages.querySelector('.picture__comments').textContent = comments;
-  someImages.querySelector('.picture__likes').textContent = likes;
-  imageListFragment.appendChild(someImages);
-});
+  return pictureContainer;
+};
 
-newUserImage.appendChild(imageListFragment);
+const renderImages = (images) => {
+  const picturesContainer = document.querySelector('.pictures');
+  const imageListFragment = document.createDocumentFragment();
+  for (const image of images) {
+    const renderedImage = renderImage(image);
+    imageListFragment.appendChild(renderedImage);
+  }
 
-export { renderImage };
+  picturesContainer.appendChild(imageListFragment);
+};
+
+export { renderImages };
