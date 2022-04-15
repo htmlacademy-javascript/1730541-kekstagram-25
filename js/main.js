@@ -1,6 +1,5 @@
-import './util.js';
 import { createImages } from './data.js';
+import { renderImages } from './drawing.js';
 
 const images = createImages();
-// eslint-disable-next-line no-console
-console.log(images);
+renderImages(images);
