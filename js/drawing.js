@@ -1,3 +1,5 @@
+import { renderFullImage } from './drawing-full.js';
+
 const pictureTemplate = document.querySelector('#picture').content;
 
 const renderImage = ({ url, description, likes, comments }) => {
@@ -15,6 +17,9 @@ const renderImages = (images) => {
   const imageListFragment = document.createDocumentFragment();
   for (const image of images) {
     const renderedImage = renderImage(image);
+    renderedImage.addEventListener('click', () => {
+      renderFullImage(image);
+    });
     imageListFragment.appendChild(renderedImage);
   }
 

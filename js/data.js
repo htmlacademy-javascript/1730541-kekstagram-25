@@ -24,7 +24,7 @@ const NAMES = [
   'Юлиан',
 ];
 
-const createComments = (arrayLength = 0) => {
+const createComments = (arrayLength) => {
   const result = [];
   for (let commentsLength = 1; commentsLength < arrayLength; commentsLength++) {
     result.push({
@@ -43,7 +43,7 @@ const createImage = (count = 0) => ({
   url: `photos/${count}.jpg`,
   description: DESCRIPTIONS[getRandomInt(0, DESCRIPTIONS.length - 1)],
   likes: getRandomInt(15, 200),
-  comments: createComments(getRandomInt(0, 7)),
+  comments: createComments(getRandomInt(1, 7)),
 });
 
 const createImages = () => {
