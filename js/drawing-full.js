@@ -1,3 +1,5 @@
+import { isEscapeKey } from './util.js';
+
 const imageSection = document.querySelector('.big-picture');
 const imageCancel = imageSection.querySelector('.big-picture__cancel');
 const socialCommentCount = imageSection.querySelector('.social__comment-count');
@@ -53,7 +55,7 @@ imageCancel.addEventListener('click', () => {
 });
 
 document.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
+  if (isEscapeKey(evt)) {
     closeFullImage();
   }
 });

@@ -32,7 +32,8 @@
       <section class="img-upload">
         <div class="img-upload__wrapper">
           <h2 class="img-upload__title  visually-hidden">Загрузка фотографии</h2>
-          <form class="img-upload__form" id="upload-select-image" method="post" enctype="multipart/form-data"
+          <form class="img-upload__form" id="upload-select-image"
+            action="https://25.javascript.pages.academy/kekstagram" method="post" enctype="multipart/form-data"
             autocomplete="off">
 
             <!-- Изначальное состояние поля для загрузки изображения -->
@@ -42,7 +43,7 @@
             </fieldset>
 
             <!-- Форма редактирования изображения -->
-            <div class="img-upload__overlay  hidden">
+            <div class="img-upload__overlay  hidden" tabindex="0">
               <div class="img-upload__wrapper">
                 <div class="img-upload__preview-container">
 
@@ -247,7 +248,7 @@
   <template id="messages">
     <div class="img-upload__message  img-upload__message--loading">Загружаем...</div>
   </template>
-
+  <script src="dist/pristine.js" type="text/javascript"></script>
   <script src="js/main.js" type="module"></script>
 
 </body>

@@ -9,14 +9,27 @@ const getRandomInt = (min = 0, max = 0) => {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 
-/*
-const checkLength = (checkedString, maxLength = 140) => {
+const checkStringLength = (checkedString, maxLength = 140) => {
   if (checkedString.length <= maxLength) {
     return true;
   } else {
     return false;
   }
 };
-*/
+
+const checkArrayLength = (Array, maxLength = 5) => {
+  if (Array.length <= maxLength) {
+    return true;
+  } else {
+    return false;
+  }
+};
+
+const isEnterKey = (evt) => evt.key === 'Enter';
+const isEscapeKey = (evt) => evt.key === 'Escape';
 
 export { getRandomInt };
+export { checkStringLength };
+export { checkArrayLength };
+export { isEscapeKey };
+export { isEnterKey };
