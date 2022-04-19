@@ -1,10 +1,11 @@
 import { isEscapeKey } from './util.js';
 
+//const SHOWING_COMMENTS_COUNT = 5;
 const imageSection = document.querySelector('.big-picture');
 const imageCancel = imageSection.querySelector('.big-picture__cancel');
 const socialCommentCount = imageSection.querySelector('.social__comment-count');
 const commentsCount = socialCommentCount.querySelector('.comments-count');
-const commentLoader = imageSection.querySelector('.comments-loader');
+//const commentLoader = imageSection.querySelector('.comments-loader');
 const bodyTag = document.body;
 const bigPictureImg = imageSection.querySelector('.big-picture__img img');
 const socialCaption = imageSection.querySelector('.social__caption');
@@ -41,8 +42,6 @@ const renderFullImage = ({ url, description, likes, comments }) => {
   }
 
   imageSection.classList.remove('hidden');
-  socialCommentCount.classList.add('hidden');
-  commentLoader.classList.add('hidden');
   bodyTag.classList.add('modal-open');
 
 };

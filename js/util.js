@@ -17,19 +17,10 @@ const checkStringLength = (checkedString, maxLength) => {
   }
 };
 
-const checkArrayLength = (Array, maxLength) => {
-  if (Array.length <= maxLength) {
-    return true;
-  } else {
-    return false;
-  }
-};
-
 const isEnterKey = (evt) => evt.key === 'Enter';
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 export { getRandomInt };
 export { checkStringLength };
-export { checkArrayLength };
 export { isEscapeKey };
 export { isEnterKey };
