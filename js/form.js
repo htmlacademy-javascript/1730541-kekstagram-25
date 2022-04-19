@@ -1,9 +1,9 @@
 import { isEscapeKey, isEnterKey } from './util.js';
 
-const loadSection = document.querySelector('.img-upload');
-const imageUpload = loadSection.querySelector('.img-upload__input');
-const editPhoto = loadSection.querySelector('.img-upload__overlay');
-const buttonCancel = loadSection.querySelector('.img-upload__cancel');
+const imgUploadForm = document.querySelector('.img-upload__form');
+const imageUpload = imgUploadForm.querySelector('.img-upload__input');
+const editPhoto = imgUploadForm.querySelector('.img-upload__overlay');
+const buttonCancel = imgUploadForm.querySelector('.img-upload__cancel');
 const bodyTag = document.body;
 
 const openImageUpload = () => {
@@ -11,28 +11,37 @@ const openImageUpload = () => {
   bodyTag.classList.add('modal-open');
 };
 
-imageUpload.addEventListener('click', () => {
-  openImageUpload();
-});
-
-imageUpload.addEventListener('keydown', (evt) => {
-  if (isEnterKey(evt)) {
+const initForm = () => {
+  imageUpload.addEventListener('change', () => {
     openImageUpload();
-  }
-});
+  });
 
-const closeImageUpload = () => {
-  editPhoto.classList.add('hidden');
-  bodyTag.classList.remove('modal-open');
+  imageUpload.addEventListener('keydown', (evt) => {
+    if (isEnterKey(evt)) {
+      openImageUpload();
+    }
+  });
+
+  const closeImageUpload = () => {
+    editPhoto.classList.add('hidden');
+    bodyTag.classList.remove('modal-open');
+    imgUploadForm.reset();
+  };
+
+  buttonCancel.addEventListener('click', () => {
+    closeImageUpload();
+  });
+
+  document.addEventListener('keydown', (evt) => {
+    if (isEscapeKey(evt)) {
+      // если нажали на esc находясь в инпуте или текстарее, то не закрываем имадж
+      if (['TEXTAREA', 'INPUT'].includes(evt.target.tagName)) {
+        return;
+      }
+      evt.preventDefault();
+      closeImageUpload();
+    }
+  });
 };
 
-buttonCancel.addEventListener('click', () => {
-  closeImageUpload();
-});
-
-document.addEventListener('keydown', (evt) => {
-  if (isEscapeKey(evt)) {
-    evt.preventDefault();
-    closeImageUpload();
-  }
-});
+export { initForm };
