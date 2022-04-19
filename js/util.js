@@ -9,7 +9,7 @@ const getRandomInt = (min = 0, max = 0) => {
   return Math.floor(Math.random() * (max - min)) + min;
 };
 
-const checkStringLength = (checkedString, maxLength = 140) => {
+const checkStringLength = (checkedString, maxLength) => {
   if (checkedString.length <= maxLength) {
     return true;
   } else {
@@ -17,7 +17,7 @@ const checkStringLength = (checkedString, maxLength = 140) => {
   }
 };
 
-const checkArrayLength = (Array, maxLength = 5) => {
+const checkArrayLength = (Array, maxLength) => {
   if (Array.length <= maxLength) {
     return true;
   } else {

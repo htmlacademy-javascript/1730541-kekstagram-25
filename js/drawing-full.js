@@ -7,6 +7,7 @@ const commentsCount = socialCommentCount.querySelector('.comments-count');
 const commentLoader = imageSection.querySelector('.comments-loader');
 const bodyTag = document.body;
 const bigPictureImg = imageSection.querySelector('.big-picture__img img');
+const socialCaption = imageSection.querySelector('.social__caption');
 const likesCount = imageSection.querySelector('.likes-count');
 const socialComments = imageSection.querySelector('.social__comments');
 
@@ -31,6 +32,7 @@ const renderComment = ({ avatar, message, name }) => {
 const renderFullImage = ({ url, description, likes, comments }) => {
   bigPictureImg.src = url;
   bigPictureImg.alt = description;
+  socialCaption.textContent = description;
   likesCount.textContent = likes;
   commentsCount.textContent = comments.length;
   socialComments.innerHTML = '';
