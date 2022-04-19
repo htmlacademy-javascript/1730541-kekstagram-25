@@ -1,10 +1,14 @@
+import { isEscapeKey } from './util.js';
+
+//const SHOWING_COMMENTS_COUNT = 5;
 const imageSection = document.querySelector('.big-picture');
 const imageCancel = imageSection.querySelector('.big-picture__cancel');
 const socialCommentCount = imageSection.querySelector('.social__comment-count');
 const commentsCount = socialCommentCount.querySelector('.comments-count');
-const commentLoader = imageSection.querySelector('.comments-loader');
+//const commentLoader = imageSection.querySelector('.comments-loader');
 const bodyTag = document.body;
 const bigPictureImg = imageSection.querySelector('.big-picture__img img');
+const socialCaption = imageSection.querySelector('.social__caption');
 const likesCount = imageSection.querySelector('.likes-count');
 const socialComments = imageSection.querySelector('.social__comments');
 
@@ -29,6 +33,7 @@ const renderComment = ({ avatar, message, name }) => {
 const renderFullImage = ({ url, description, likes, comments }) => {
   bigPictureImg.src = url;
   bigPictureImg.alt = description;
+  socialCaption.textContent = description;
   likesCount.textContent = likes;
   commentsCount.textContent = comments.length;
   socialComments.innerHTML = '';
@@ -37,8 +42,6 @@ const renderFullImage = ({ url, description, likes, comments }) => {
   }
 
   imageSection.classList.remove('hidden');
-  socialCommentCount.classList.add('hidden');
-  commentLoader.classList.add('hidden');
   bodyTag.classList.add('modal-open');
 
 };
@@ -53,7 +56,7 @@ imageCancel.addEventListener('click', () => {
 });
 
 document.addEventListener('keydown', (evt) => {
-  if (evt.key === 'Escape') {
+  if (isEscapeKey(evt)) {
     closeFullImage();
   }
 });
