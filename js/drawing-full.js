@@ -75,6 +75,9 @@ function renderCommentsSlice(comments) {
   socialComments.appendChild(commentsFragment);
   commentLoader.classList.toggle('hidden', comments.length === commentsToShow.length);
   socialCommentCount.innerHTML = `${commentsToShow.length} из <span class="comments-count">${comments.length}</span> комментариев`;
+  if (commentsToShow.length < SHOWING_COMMENTS_COUNT) {
+    commentLoader.classList.add('hidden');
+  }
 }
 
 document.addEventListener('keydown', (evt) => {
