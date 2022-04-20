@@ -1,9 +1,9 @@
 import { isEscapeKey, isEnterKey } from './util.js';
 
-const imgUploadForm = document.querySelector('.img-upload__form');
-const imageUpload = imgUploadForm.querySelector('.img-upload__input');
-const editPhoto = imgUploadForm.querySelector('.img-upload__overlay');
-const buttonCancel = imgUploadForm.querySelector('.img-upload__cancel');
+const imageUploadForm = document.querySelector('.img-upload__form');
+const imageUpload = imageUploadForm.querySelector('.img-upload__input');
+const editPhoto = imageUploadForm.querySelector('.img-upload__overlay');
+const buttonCancel = imageUploadForm.querySelector('.img-upload__cancel');
 const bodyTag = document.body;
 
 const openImageUpload = () => {
@@ -25,7 +25,7 @@ const initForm = () => {
   const closeImageUpload = () => {
     editPhoto.classList.add('hidden');
     bodyTag.classList.remove('modal-open');
-    imgUploadForm.reset();
+    imageUploadForm.reset();
   };
 
   buttonCancel.addEventListener('click', () => {
@@ -34,7 +34,6 @@ const initForm = () => {
 
   document.addEventListener('keydown', (evt) => {
     if (isEscapeKey(evt)) {
-      // если нажали на esc находясь в инпуте или текстарее, то не закрываем имадж
       if (['TEXTAREA', 'INPUT'].includes(evt.target.tagName)) {
         return;
       }

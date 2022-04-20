@@ -2,14 +2,14 @@ const MAX_STRING_LENGTH = 140;
 const HASHTAGS_QUANTITY = 5;
 
 const loadSection = document.querySelector('.img-upload');
-const imgUploadForm = loadSection.querySelector('.img-upload__form');
+const imageUploadForm = loadSection.querySelector('.img-upload__form');
 const hashtagField = loadSection.querySelector('.text__hashtags');
 const commentField = loadSection.querySelector('.text__description');
 const buttonSubmit = document.querySelector('.img-upload__submit');
 const tagRegExp = /^#[A-Za-zА-Яа-яЁё0-9]{1,19}$/;
 
 
-const pristine = new Pristine(imgUploadForm, {
+const pristine = new Pristine(imageUploadForm, {
   classTo: 'text',
   errorClass: 'text--invalid',
   successClass: 'text-valid',
@@ -64,11 +64,11 @@ const initFormValidation = () => {
   commentField.addEventListener('input', unblockSubmitButton);
   hashtagField.addEventListener('input', unblockSubmitButton);
 
-  imgUploadForm.addEventListener('submit', (evt) => {
+  imageUploadForm.addEventListener('submit', (evt) => {
     evt.preventDefault();
     const isValid = pristine.validate();
     if (isValid) {
-      imgUploadForm.submit();
+      imageUploadForm.submit();
     } else {
       blockSubmitButton();
     }
