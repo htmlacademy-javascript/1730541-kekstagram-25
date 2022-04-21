@@ -1,39 +1,51 @@
-const SCALING_STEP = 25;
-const SCALING_STEP_MAX = 100;
-const SCALING_STEP_MIN = 25;
+const SCALE_STEP = 25;
+const MIN_SCALE_VALUE = 25;
+const MAX_SCALE_VALUE = 100;
+const DEFAULT_SCALE_VALUE = 100;
 
-const imageUploadScale = document.querySelector('.img-upload__scale');
-const scaleButtonBigger = imageUploadScale.querySelector('.scale__control--bigger');
-const scaleButtonSmaller = imageUploadScale.querySelector('.scale__control--smaller');
-const scaleControlValue = imageUploadScale.querySelector('.scale__control--value');
-const imageUploadPreview = document.querySelector('.img-upload__preview img');
+const minScaleButton = document.querySelector('.scale__control--smaller');
+const maxScaleButton = document.querySelector('.scale__control--bigger');
+const imageScaleValue = document.querySelector('.scale__control--value');
+const editImageOverlay = document.querySelector('.img-upload__overlay');
+const imagePreview = editImageOverlay.querySelector('.img-upload__preview');
+const image = imagePreview.querySelector('img');
 
-let currentScaleValue = scaleControlValue.value;
+imageScaleValue.value = `${DEFAULT_SCALE_VALUE}%`;
 
-const setScaling = () => {
-  scaleControlValue.value = `${SCALING_STEP_MAX}%`;
-  currentScaleValue = SCALING_STEP_MAX;
-  scaleButtonBigger.addEventListener('click', () => {
-    if (currentScaleValue < SCALING_STEP_MAX) {
-      currentScaleValue += SCALING_STEP;
-      scaleControlValue.value = `${currentScaleValue}%`;
-      imageUploadPreview.style.transform = `scale(${currentScaleValue / 100})`;
-    }
-  });
+const getTransformValue = () => parseInt(imageScaleValue.value, 10);
 
-  scaleButtonSmaller.addEventListener('click', () => {
-    if (currentScaleValue > SCALING_STEP_MIN) {
-      currentScaleValue -= SCALING_STEP;
-      scaleControlValue.value = `${currentScaleValue}%`;
-      imageUploadPreview.style.transform = `scale(${currentScaleValue / 100})`;
-    }
-  });
+const getScaleImageTransform = () => {
+  image.style.transform = `scale(${(parseInt(imageScaleValue.value, 10) / 100)})`;
 };
 
-const resetScaling = () => {
-  imageUploadPreview.style.transform = 'scale(1)';
-  scaleControlValue.value = `${SCALING_STEP_MAX}%`;
-  currentScaleValue = SCALING_STEP_MAX;
+const getLowerValueScale = () => {
+  let resultValue = getTransformValue() - SCALE_STEP;
+  if (resultValue < MIN_SCALE_VALUE) {
+    resultValue = MIN_SCALE_VALUE;
+  } else {
+    imageScaleValue.value = `${resultValue}%`;
+  }
 };
 
-export { setScaling, resetScaling };
+const getHigherValueScale = () => {
+  let resultValue = getTransformValue() + SCALE_STEP;
+  if (resultValue > MAX_SCALE_VALUE) {
+    resultValue = MAX_SCALE_VALUE;
+  }
+  imageScaleValue.value = `${resultValue}%`;
+};
+
+function onMinButtonClick() {
+  getLowerValueScale();
+  getScaleImageTransform();
+}
+
+function onMaxButtonClick() {
+  getHigherValueScale();
+  getScaleImageTransform();
+}
+
+minScaleButton.addEventListener('click', onMinButtonClick);
+maxScaleButton.addEventListener('click', onMaxButtonClick);
+
+export { getScaleImageTransform };

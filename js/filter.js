@@ -1,4 +1,3 @@
-
 import { getData } from './api.js';
 import { renderImages } from './drawing.js';
 

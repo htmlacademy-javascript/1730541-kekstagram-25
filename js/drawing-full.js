@@ -43,12 +43,10 @@ const renderFullImage = ({ url, description, likes, comments }) => {
   for (const comment of comments) {
     renderComment(comment);
   }
-
   imageSection.classList.remove('hidden');
   bodyTag.classList.add('modal-open');
-  renderCommentsSlice();
   commentLoader.addEventListener('click', commentsLoaderOnClick);
-
+  renderCommentsSlice(comments);
 };
 
 const closeFullImage = () => {
@@ -75,9 +73,6 @@ function renderCommentsSlice(comments) {
   socialComments.appendChild(commentsFragment);
   commentLoader.classList.toggle('hidden', comments.length === commentsToShow.length);
   socialCommentCount.innerHTML = `${commentsToShow.length} из <span class="comments-count">${comments.length}</span> комментариев`;
-  if (commentsToShow.length < SHOWING_COMMENTS_COUNT) {
-    commentLoader.classList.add('hidden');
-  }
 }
 
 document.addEventListener('keydown', (evt) => {

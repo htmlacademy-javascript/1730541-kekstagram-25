@@ -1,3 +1,7 @@
+import { sendData } from './api.js';
+import { showAlert } from './util.js';
+import { closeErrorForm, closeSuccessForm } from './form.js';
+
 const MAX_STRING_LENGTH = 140;
 const HASHTAGS_QUANTITY = 5;
 
@@ -46,10 +50,12 @@ const checkHashtagSymbols = (value) => {
 
 const blockSubmitButton = () => {
   buttonSubmit.disabled = true;
+  buttonSubmit.textContent = 'Сохраняю...';
 };
 
 const unblockSubmitButton = () => {
   buttonSubmit.disabled = false;
+  buttonSubmit.textContent = 'Опубликовать!';
 };
 
 const initFormValidation = () => {
@@ -69,8 +75,17 @@ const initFormValidation = () => {
     const isValid = pristine.validate();
     if (isValid) {
       imageUploadForm.submit();
-    } else {
-      blockSubmitButton();
+      sendData(() => {
+        closeSuccessForm();
+        unblockSubmitButton();
+      },
+        () => {
+          showAlert('Не удалось отправить форму. Попробуйте ещё раз');
+          closeErrorForm();
+          blockSubmitButton();
+        },
+        new FormData(evt.target),
+      );
     }
   });
 };
