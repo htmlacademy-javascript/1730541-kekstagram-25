@@ -32,10 +32,21 @@ const showAlert = (message) => {
   }, ALERT_SHOW_TIME);
 };
 
-const isEnterKey = (evt) => evt.key === 'Enter';
+const getRandomUniqueElements = (array) => {
+  const newArray = array.slice();
+  const elements = [];
+  const newArrayLength = array.length;
+  for (let i = 0; i < newArrayLength; i++) {
+    const randomId = getRandomInt(0, newArray.length - 1);
+    elements.push(newArray[randomId]);
+    newArray.splice(randomId, 1);
+  }
+  return elements;
+};
+
 const isEscapeKey = (evt) => evt.key === 'Escape';
 
 export { getRandomInt };
 export { isEscapeKey };
-export { isEnterKey };
 export { showAlert };
+export { getRandomUniqueElements };

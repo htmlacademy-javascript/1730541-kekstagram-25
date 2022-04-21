@@ -4,10 +4,13 @@ import { initForm } from './form.js';
 import { initFormValidation } from './validation.js';
 import { getData } from './api.js';
 import './add-effect.js';
+import { showFilteredPictures } from './filter.js';
 
 getData((images) => {
   createImages();
   renderImages(images);
-  initForm();
-  initFormValidation();
+  showFilteredPictures(images);
 });
+
+initForm();
+initFormValidation();

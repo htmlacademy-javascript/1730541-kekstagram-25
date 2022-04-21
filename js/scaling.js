@@ -1,7 +1,6 @@
 const SCALE_STEP = 25;
 const MIN_SCALE_VALUE = 25;
 const MAX_SCALE_VALUE = 100;
-const DEFAULT_SCALE_VALUE = 100;
 
 const minScaleButton = document.querySelector('.scale__control--smaller');
 const maxScaleButton = document.querySelector('.scale__control--bigger');
@@ -10,7 +9,7 @@ const editImageOverlay = document.querySelector('.img-upload__overlay');
 const imagePreview = editImageOverlay.querySelector('.img-upload__preview');
 const image = imagePreview.querySelector('img');
 
-imageScaleValue.value = `${DEFAULT_SCALE_VALUE}%`;
+imageScaleValue.value = `${MAX_SCALE_VALUE}%`;
 
 const getTransformValue = () => parseInt(imageScaleValue.value, 10);
 

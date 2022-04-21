@@ -1,103 +1,108 @@
-const effectsList = {
-  chrome: {
-    csseffect: 'grayscale',
-    min: 0,
-    max: 1,
+const imagePreview = document.querySelector('.img-upload__preview');
+const image = imagePreview.querySelector('img');
+const sliderElement = document.querySelector('.effect-level__slider');
+const valueElement = document.querySelector('.effect-level__value');
+const effectsList = document.querySelector('.effects__list');
+const sliderBlock = document.querySelector('.effect-level');
+
+const effects = {
+  none: {
+    range: {
+      min: 0,
+      max: 1,
+    },
     start: 1,
     step: 0.1,
+    filter: 'none',
+    unit: ''
+  },
+  chrome: {
+    range: {
+      min: 0,
+      max: 1,
+    },
+    start: 1,
+    step: 0.1,
+    filter: 'grayscale',
     unit: ''
   },
   sepia: {
-    csseffect: 'sepia',
-    min: 0,
-    max: 1,
+    range: {
+      min: 0,
+      max: 1,
+    },
     start: 1,
     step: 0.1,
+    filter: 'sepia',
     unit: ''
   },
   marvin: {
-    csseffect: 'invert',
-    min: 0,
-    max: 100,
+    range: {
+      min: 0,
+      max: 100,
+    },
     start: 100,
     step: 1,
-    unit: '%'
+    filter: 'invert',
+    unit: '%',
   },
   phobos: {
-    csseffect: 'blur',
-    min: 0,
-    max: 3,
+    range: {
+      min: 0,
+      max: 3,
+    },
     start: 3,
     step: 0.1,
-    unit: 'px'
+    filter: 'blur',
+    unit: 'px',
   },
   heat: {
-    csseffect: 'brightness',
-    min: 1,
-    max: 3,
+    range: {
+      min: 1,
+      max: 3,
+    },
     start: 3,
     step: 0.1,
-    unit: ''
-  }
+    filter: 'brightness',
+    unit: '',
+  },
 };
 
-const changeEffectsRadioButtonNodes = document.querySelectorAll('.effects__radio');
-const imagePreview = document.querySelector('.img-upload__preview');
-const fullSizeImage = imagePreview.querySelector('img');
-const sliderEffectLevel = document.querySelector('.effect-level__slider');
-const sliderField = document.querySelector('.img-upload__effect-level');
-sliderField.classList.add('hidden');
-
-noUiSlider.create(sliderEffectLevel, {
+noUiSlider.create(sliderElement, {
   range: {
     min: 0,
     max: 1,
   },
-  start: 1,
+  start: 0,
   step: 0.1,
   connect: 'lower',
+  format: {
+    to: (value) => {
+      if (Number.isInteger(value)) {
+        return value.toFixed(0);
+      }
+      return value.toFixed(1);
+    },
+    from: (value) => parseFloat(value)
+  }
 });
 
-function changeSaturationEffectSlider(evt) {
-  const effect = evt;
-  const effectParams = effectsList[effect];
-  const cssEffect = effectParams.csseffect;
+let effectFilter;
 
-  sliderEffectLevel.noUiSlider.updateOptions({
-    range: {
-      min: effectParams.min,
-      max: effectParams.max
-    },
-    start: effectParams.start,
-    step: effectParams.step
-  });
-
-  const unit = effectParams.unit;
-
-  sliderEffectLevel.noUiSlider.on('update', () => {
-    fullSizeImage.style.filter = `${cssEffect}(${sliderEffectLevel.noUiSlider.get()}${unit})`;
-  });
-}
-
-function hideSliderScale() {
-  sliderEffectLevel.classList.add('hidden');
-  sliderField.classList.add('hidden');
-  fullSizeImage.style.filter = '';
-}
-
-function onEffectSelect(evt) {
-  sliderEffectLevel.classList.remove('hidden');
-  sliderField.classList.remove('hidden');
-
-  const selectEffect = evt.target.value;
-
-  if (selectEffect === 'none') {
-    hideSliderScale();
+effectsList.addEventListener('change', (evt) => {
+  if (evt.target.matches('.effects__radio')) {
+    const effect = evt.target.value;
+    effectFilter = effects[effect];
+    sliderElement.noUiSlider.updateOptions(effectFilter);
+    if (effect === 'none') {
+      image.style.filter = '';
+      sliderBlock.classList.add('hidden');
+    } else {
+      sliderBlock.classList.remove('hidden');
+    }
+    sliderElement.noUiSlider.on('update', () => {
+      valueElement.value = sliderElement.noUiSlider.get();
+      image.style.filter = `${effectFilter.filter}(${valueElement.value}${effectFilter.unit})`;
+    });
   }
-
-  changeSaturationEffectSlider(selectEffect);
-}
-
-changeEffectsRadioButtonNodes.forEach((button) => {
-  button.addEventListener('change', onEffectSelect);
 });
