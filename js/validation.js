@@ -78,13 +78,11 @@ const initFormValidation = () => {
       sendData(() => {
         closeSuccessForm();
         unblockSubmitButton();
-      },
-        () => {
-          showAlert('Не удалось отправить форму. Попробуйте ещё раз');
-          closeErrorForm();
-          blockSubmitButton();
-        },
-        new FormData(evt.target),
+      }, () => {
+        showAlert('Не удалось отправить форму. Попробуйте ещё раз');
+        closeErrorForm();
+        blockSubmitButton();
+      }, new FormData(evt.target),
       );
     }
   });
